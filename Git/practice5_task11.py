@@ -30,10 +30,12 @@ class LandVehicl(Vehicle):
 
     def drive(self, speed_increase: int):
         self.speed = self.speed + speed_increase
-        if self.speed != 0:
+        if self.speed > 0:
             print('Їдемо по суші')
-        elif self.speed <= 0:
+        elif self.speed == 0:
             print('Ми стоїмо')
+        else:
+            print('Швидкість не може бути < 0')
 
 """
 Child class for LandVehicl (Class B), which is following Vehicles (Class A).
@@ -101,6 +103,8 @@ if __name__ == '__main__':  # Code to execute
     car1 = LandVehicl('Toyota', 'Camry')
     car1.honk(True)
     car1.drive(0)
+    car1.drive(10)
+    car1.drive(-11)
 
     car2 = CarClassC('Toyota', 'Camry', 0)
     car2.open_car()
