@@ -7,7 +7,6 @@ class Vehicle(object):
         if work == True:
             print("Beep!")
 
-
 """
 Parent class for all Vehicles (Class A).
 
@@ -24,7 +23,6 @@ Parent class for all Vehicles (Class A).
         If it works (bool == 1) - it makes "Beep!" sound.
 """
 
-
 class LandVehicl(Vehicle):
     def __init__(self, make, model, speed: int = 0):  # якщо є додаткові параметри
         super().__init__(make, model)
@@ -37,11 +35,9 @@ class LandVehicl(Vehicle):
         elif self.speed <= 0:
             print('Ми стоїмо')
 
-
 """
 Child class for LandVehicl (Class B), which is following Vehicles (Class A).
 """
-
 
 class CarClassC(LandVehicl):
     def __init__(self, make, model, speed):
@@ -52,11 +48,9 @@ class CarClassC(LandVehicl):
     def open_car(self):
         print("Багажник відкрито")
 
-
 """
 Child class for CarClassC (Class C), which is following LandVehicle (Class B).
 """
-
 
 class TruckClassC(LandVehicl):
     def __init__(self, make, model, speed):
@@ -72,11 +66,6 @@ class TruckClassC(LandVehicl):
 Child class for TruckClassC (Class C), which is following LandVehicle (Class B).
 """
 
-
-# Підкласи від WaterVehicle:
-# Boat: Наслідується від WaterVehicle.
-# Унікальний метод: anchor(), який виводить "Човен на якорі".
-
 class WaterVehicle(Vehicle):
     def __init__(self, make, model):
         super().__init__(make, model)
@@ -89,21 +78,17 @@ class BoatClassC(WaterVehicle):
     def anchor(self):
         print("Човен на якорі")
 
-
 """
 Child class for WaterVehicle (Class B), which is following Vehicles (Class A).
 """
-
 
 class ShipClassC(WaterVehicle):
     def __init__(self, make, model):
         self.make = make
         self.model = model
 
-
     def sound_horn(self):
         print("Гудок корабля")
-
 
 """
 Child class for ShipClassC (Class C), which is following WaterVehicle (Class B).
@@ -114,11 +99,10 @@ Child class for ShipClassC (Class C), which is following WaterVehicle (Class B).
 if __name__ == '__main__':  # Code to execute
 
     car1 = LandVehicl('Toyota', 'Camry')
-    car1.honk(1)
-    car1.drive(10)
+    car1.honk(True)
     car1.drive(0)
 
-    car2 = CarClassC('Toyota', 'Camry', 50)
+    car2 = CarClassC('Toyota', 'Camry', 0)
     car2.open_car()
 
     car3 = TruckClassC('Toyota', 'Camry', 50)
