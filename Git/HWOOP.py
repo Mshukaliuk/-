@@ -6,26 +6,24 @@ import time
 # Task 1. Реалізуйте декоратор type_check,
 # який перевіряєвідповідність типів аргументів функції заданим типам і викидає виняток, якщо типи не збігаються.
 
-def type_check(*checked_params_from_signature):
+import time
+def type_check(*required_types):
     def decorator(func):
-        def wrapper(*passed_function_params):
-            if len(checked_params_from_signature) != len(passed_function_params):
-                raise ValueError("Argument count does not match")
-
-            for i in range(len(checked_params_from_signature)):
-                if not isinstance(passed_function_params[i], checked_params_from_signature[i]):
-                    raise TypeError(f"Argument {passed_function_params[i]} is not of type {checked_params_from_signature[i]}")
-
-            return func(*passed_function_params)
+        def wrapper(*args, **kwargs):
+            for i in range(len(args)):
+                if not isinstance(args[i], required_types[i]):
+                    raise TypeError(f" Очікували {required_types[i]}, однак отримали {type(args[i])}")
+            return func(*args, **kwargs)
         return wrapper
-    time.sleep(5)
     return decorator
 
-# Correct usage
-type_check(123, "Alice", 123) #args[i]
+# Використання
 
-# This will raise a TypeError
-type_check("123", "Alice")
+@type_check(int, str)
+def my_function(num, text):
+    print(f'це число: {num}, це текст: {text}')
+
+my_function(42, "Hello")
 
 # Task 2. Реалізуйте декоратор delay, який затримує виконання функції на вказану кількість секунд.
 # Функція повинна на заданий час давати shutdown, також повинна бути перевірка на статус код та try/except для перевірки connection
