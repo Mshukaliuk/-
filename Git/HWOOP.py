@@ -9,7 +9,7 @@ conn = sqlite3.connect('mydb.db')
 print("DEB: Conn:", conn)
 
 conn.execute('''CREATE TABLE IF NOT EXISTS
-             person (id INTEGER PRIMARY KEY, name TEXT, surname TEXT, date_of_birth DATE )''')
+             person (id INTEGER PRIMARY KEY, name TEXT, user_name TEXT, date_of_birth DATE )''')
 
 conn.commit()
 conn.close()
@@ -22,9 +22,8 @@ Faker.seed(42)
 conn = sqlite3.connect('mydb.db')
 
 for i in range(1, 16):
-    print("DEB: Add data:", i, fake.name(), fake.surname(), fake.date_of_birth)
-    conn.execute("INSERT INTO person (id, name, surname, date_of_birth) VALUES (?, ?, ?, ?)",(i, fake.name(), fake.surname(), fake.date_of_birth))
-
+    print("DEB: Add data:", i, fake.name(), fake.user_name(), fake.date_of_birth)
+    conn.execute("INSERT INTO person (id, name, user_name, date_of_birth) VALUES (?, ?, ?, ?)",(i, fake.name(), fake.user_name(), fake.date_of_birth()))
 
 conn.commit()
 conn.close()
