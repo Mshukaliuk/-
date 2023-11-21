@@ -21,11 +21,10 @@ Faker.seed(42)
 
 conn = sqlite3.connect('mydb.db')
 
-with conn:
-    for i in range(1, 16):
-        print("DEB: Add data:", i, fake.name(), fake.surname(), fake.date_of_birth)
-        conn.execute("INSERT INTO person (id, name, surname, date_of_birth) VALUES (?, ?, ?, ?)",
-                     (i, fake.name(), fake.surname(), fake.date_of_birth))
+for i in range(1, 16):
+    print("DEB: Add data:", i, fake.name(), fake.surname(), fake.date_of_birth)
+    conn.execute("INSERT INTO person (id, name, surname, date_of_birth) VALUES (?, ?, ?, ?)",(i, fake.name(), fake.surname(), fake.date_of_birth))
+
 
 conn.commit()
 conn.close()
