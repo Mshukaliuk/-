@@ -28,6 +28,26 @@ my_function(42, "Hello")
 # Task 2. Реалізуйте декоратор delay, який затримує виконання функції на вказану кількість секунд.
 # Функція повинна на заданий час давати shutdown, також повинна бути перевірка на статус код та try/except для перевірки connection
 
+def task2(func, delay=5):
+    def delay_funct(*args, **kwargs):
+        attemps = 0
+        while attemps < 10:
+            result = func(*args, **kwargs)
+            time.sleep(delay)
+            attemps += 1
+        return result
+
+    return delay_funct
+
+@task2
+def func2(number: int):
+    if number > 10:
+        print(f'{func2.__name__}: yes')
+    else:
+        print(f'{func2.__name__}: no')
+
+func2(5)
+
 # SQL - tasks
 # Task 1. create table Person, with id: int, primary key, name: text, surname: text, date_of_birth date
 
