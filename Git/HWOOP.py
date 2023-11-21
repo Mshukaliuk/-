@@ -1,8 +1,17 @@
-# SQL - tasks
-# Task 1. create table Person, with id: int, primary key, name: text, surname: text, date_of_birth date
-
 import sqlite3
 from faker import Faker
+
+# Декоратори
+# Task 1. Реалізуйте декоратор type_check,
+# який перевіряєвідповідність типів аргументів функції заданим типам і викидає виняток, якщо типи не збігаються.
+
+
+
+# Task 2. Реалізуйте декоратор delay, який затримує виконання функції на вказану кількість секунд.
+# Функція повинна на заданий час давати shutdown, також повинна бути перевірка на статус код та try/except для перевірки connection
+
+# SQL - tasks
+# Task 1. create table Person, with id: int, primary key, name: text, surname: text, date_of_birth date
 
 conn = sqlite3.connect('mydb.db')
 
@@ -30,8 +39,37 @@ conn.close()
 
 # Task 3. Знайти всіх людей у кого день народження 19-03-1998 або 12-10-1998
 
+conn = sqlite3.connect('mydb.db')
+
+cursor = conn.execute("SELECT id, name, date_of_birth FROM person WHERE date_of_birth IN ('1984-08-05','1992-06-19')")
+rows = cursor.fetchall()
+
+for row in rows:
+    print("DEB: Task 3:", row)
+
+conn.close()
+
 # Task 4. Знайте найстарших людей в наборі(топ 5)
 
+conn = sqlite3.connect('mydb.db')
+
+cursor = conn.execute("SELECT id, name, date_of_birth FROM person ORDER BY date_of_birth ASC")
+
+rows = cursor.fetchmany(5)
+for row in rows:
+    print("DEB: Task 4:", row)
+
 # Task 5. Вивезти всіх у кого name більше surname
+
+conn = sqlite3.connect('mydb.db')
+
+cursor = conn.execute("SELECT name FROM person")
+rows = cursor.fetchall()
+
+for row in rows:
+    # print("DEB1: Task 4:", row)
+    names_list = row[0].split(' ')
+    if len(names_list[0]) > len(names_list[1]):
+        print("DEB2: Task 4.1:", names_list)
 
 # * Оформити потрібно на гіт, з перевіркою flake8, requirements.txt, gitignore
